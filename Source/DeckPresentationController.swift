@@ -643,5 +643,12 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
         
         return true
     }
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else { return false }
+
+        let velocity = panGestureRecognizer.velocity(in: presentedView)
+        return abs(velocity.y) > abs(velocity.x)
+    }
     
 }
